@@ -22,6 +22,14 @@ interface AppState {
   expandedFeedIds: string[];
   setExpandedFeedIds: (ids: string[]) => void;
   toggleExpandedFeed: (id: string) => void;
+
+  // 未读计数状态
+  totalUnreadCount: number;
+  totalStarredCount: number;
+  setTotalUnreadCount: (count: number) => void;
+  setTotalStarredCount: (count: number) => void;
+  incrementUnreadCount: (delta: number) => void;
+  decrementUnreadCount: (delta: number) => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -47,5 +55,19 @@ export const useAppStore = create<AppState>((set) => ({
       expandedFeedIds: state.expandedFeedIds.includes(id)
         ? state.expandedFeedIds.filter((fid) => fid !== id)
         : [...state.expandedFeedIds, id],
+    })),
+
+  // 未读计数状态
+  totalUnreadCount: 0,
+  totalStarredCount: 0,
+  setTotalUnreadCount: (count) => set({ totalUnreadCount: count }),
+  setTotalStarredCount: (count) => set({ totalStarredCount: count }),
+  incrementUnreadCount: (delta) =>
+    set((state) => ({
+      totalUnreadCount: Math.max(0, state.totalUnreadCount + delta),
+    })),
+  decrementUnreadCount: (delta) =>
+    set((state) => ({
+      totalUnreadCount: Math.max(0, state.totalUnreadCount - delta),
     })),
 }));

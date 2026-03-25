@@ -11,10 +11,13 @@ import {
   Title,
   Checkbox,
   Notification,
+  Group,
+  ThemeIcon,
 } from '@mantine/core';
-import { IconCheck, IconX } from '@tabler/icons-react';
+import { IconCheck, IconX, IconRss } from '@tabler/icons-react';
 import { useNavigate } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
+import classes from './LoginPage.module.css';
 
 interface LoginForm {
   username: string;
@@ -68,12 +71,20 @@ export default function LoginPage() {
   };
 
   return (
-    <Container size="sm" py="xl">
-      <Paper shadow="md" p="xl" withBorder>
-        <Title order={2} ta="center" mb="md">
-          登录
+    <Container size="sm" className={classes.container}>
+      <Paper shadow="lg" p="xl" radius="md" className={classes.paper}>
+        {/* Logo 和标题 */}
+        <Group justify="center" mb="xl">
+          <ThemeIcon size="xl" radius="xl" color="orange" variant="light">
+            <IconRss size={32} />
+          </ThemeIcon>
+        </Group>
+        
+        <Title order={2} ta="center" className={classes.title} mb="md">
+          Tiny Tiny RSS
         </Title>
-        <Text c="dimmed" ta="center" mb="xl">
+        
+        <Text c="dimmed" ta="center" mb="xl" size="sm">
           欢迎回来，请登录您的账户
         </Text>
 
@@ -133,6 +144,7 @@ export default function LoginPage() {
             fullWidth
             loading={isLoading}
             leftSection={isLoading ? null : <IconCheck size={18} />}
+            className={classes.loginButton}
           >
             {isLoading ? '登录中...' : '登录'}
           </Button>

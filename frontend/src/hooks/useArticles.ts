@@ -13,6 +13,7 @@ import {
   useInfiniteQuery,
 } from '@tanstack/react-query';
 import { articleApi } from '../services/articleApi';
+import { useAppStore } from '../stores/appStore';
 import type {
   Article,
   ArticleListParams,
@@ -50,6 +51,7 @@ export function useArticles(
   pageSize: number = DEFAULT_PAGE_SIZE
 ) {
   const queryClient = useQueryClient();
+  const { decrementUnreadCount, incrementUnreadCount } = useAppStore();
 
   const {
     data,
@@ -140,6 +142,12 @@ export function useArticles(
       articleApi.markAsRead(id, read),
     onSuccess: (_, { id, read }) => {
       updateArticleInCache(id, () => ({ isRead: read }));
+      // 更新未读计数
+      if (read) {
+        decrementUnreadCount(1);
+      } else {
+        incrementUnreadCount(1);
+      }
     },
   });
 
@@ -160,11 +168,17 @@ export function useArticles(
   const batchMarkAsReadMutation = useMutation({
     mutationFn: (params: BatchOperationParams) =>
       articleApi.batchMarkAsRead(params),
-    onSuccess: (result, { ids, read }) => {
-      if (result.success && read !== undefined) {
+    onSuccess: (count, { ids, read }) => {
+      if (count > 0 && read !== undefined) {
         ids.forEach((id) => {
           updateArticleInCache(id, () => ({ isRead: read }));
         });
+        // 更新未读计数
+        if (read) {
+          decrementUnreadCount(count);
+        } else {
+          incrementUnreadCount(count);
+        }
       }
     },
   });
@@ -175,8 +189,8 @@ export function useArticles(
   const batchMarkAsStarredMutation = useMutation({
     mutationFn: (params: BatchOperationParams) =>
       articleApi.batchMarkAsStarred(params),
-    onSuccess: (result, { ids, starred }) => {
-      if (result.success && starred !== undefined) {
+    onSuccess: (count, { ids, starred }) => {
+      if (count > 0 && starred !== undefined) {
         ids.forEach((id) => {
           updateArticleInCache(id, () => ({ isStarred: starred }));
         });
@@ -188,15 +202,17 @@ export function useArticles(
    * 批量删除 Mutation
    */
   const batchDeleteMutation = useMutation({
-    mutationFn: articleApi.batchDelete,
-    onSuccess: (result, ids) => {
-      if (result.success) {
+    mutationFn: (params: { ids: string[] }) =>
+      articleApi.batchDeleteArticles(params),
+    onSuccess: (count, { ids }) => {
+      if (count > 0) {
         // 从缓存中移除已删除的文章
         queryClient.setQueriesData(
           { queryKey: articleQueryKeys.lists() },
           (oldData: unknown) => {
             if (!oldData) return oldData;
 
+            // 处理无限滚动数据
             if (typeof oldData === 'object' && oldData !== null && 'pages' in oldData) {
               const infiniteData = oldData as { pages: ArticleListResponse[] };
               return {
@@ -208,6 +224,13 @@ export function useArticles(
                   ),
                 })),
               };
+            }
+
+            // 处理普通列表数据
+            if (Array.isArray(oldData)) {
+              return (oldData as Article[]).filter(
+                (article) => !ids.includes(article.id)
+              );
             }
 
             return oldData;
@@ -262,7 +285,7 @@ export function useArticles(
    */
   const batchDelete = useCallback(
     async (ids: string[]) => {
-      return batchDeleteMutation.mutateAsync(ids);
+      return batchDeleteMutation.mutateAsync({ ids });
     },
     [batchDeleteMutation]
   );

@@ -1,0 +1,28 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3b5998 0%, #2d4475 100%);
+  padding: var(--mantine-spacing-md);
+}
+
+.paper {
+  width: 100%;
+  max-width: 420px;
+  background-color: white;
+  border: 1px solid rgba(59, 89, 152, 0.2);
+}
+
+.title {
+  color: #3b5998;
+  font-weight: 700;
+}
+
+.loginButton {
+  background-color: #3b5998;
+  
+  &:hover {
+    background-color: #2d4475;
+  }
+}

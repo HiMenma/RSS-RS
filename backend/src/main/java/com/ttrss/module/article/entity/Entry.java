@@ -55,4 +55,9 @@ public class Entry implements Serializable {
      * 作者
      */
     private String author;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdAt;
 }

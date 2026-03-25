@@ -2,29 +2,11 @@
  * 标签 API 服务
  */
 
-import type { Label, ApiError } from '../types';
+import type { Label } from '../types';
 import type { LabelFormData } from '../types';
+import { authFetch, getAuthHeaders, handleResponseError } from '../utils/api';
 
 const API_BASE_URL = '/api';
-
-/**
- * 处理 API 响应错误
- */
-async function handleResponseError(response: Response): Promise<never> {
-  let errorData: ApiError | { message: string } = { message: '请求失败' };
-
-  try {
-    const contentType = response.headers.get('content-type');
-    if (contentType?.includes('application/json')) {
-      errorData = await response.json();
-    }
-  } catch {
-    // 忽略解析错误，使用默认错误信息
-  }
-
-  const errorMessage = 'message' in errorData ? errorData.message : `HTTP error! status: ${response.status}`;
-  throw new Error(errorMessage);
-}
 
 /**
  * 获取标签列表
@@ -33,9 +15,10 @@ async function handleResponseError(response: Response): Promise<never> {
  * @throws 获取失败时抛出错误
  */
 export async function getLabels(): Promise<Label[]> {
-  const response = await fetch(`${API_BASE_URL}/labels`, {
+  const response = await authFetch(`${API_BASE_URL}/labels`, {
     method: 'GET',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
   });
@@ -55,9 +38,10 @@ export async function getLabels(): Promise<Label[]> {
  * @throws 获取失败时抛出错误
  */
 export async function getLabel(id: number): Promise<Label> {
-  const response = await fetch(`${API_BASE_URL}/labels/${id}`, {
+  const response = await authFetch(`${API_BASE_URL}/labels/${id}`, {
     method: 'GET',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
   });
@@ -80,9 +64,10 @@ export async function getLabel(id: number): Promise<Label> {
  * @throws 创建失败时抛出错误
  */
 export async function createLabel(data: LabelFormData): Promise<Label> {
-  const response = await fetch(`${API_BASE_URL}/labels`, {
+  const response = await authFetch(`${API_BASE_URL}/labels`, {
     method: 'POST',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -113,9 +98,10 @@ export async function updateLabel(
   id: number,
   data: Partial<LabelFormData>
 ): Promise<Label> {
-  const response = await fetch(`${API_BASE_URL}/labels/${id}`, {
+  const response = await authFetch(`${API_BASE_URL}/labels/${id}`, {
     method: 'PUT',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
@@ -145,9 +131,10 @@ export async function updateLabel(
  * @throws 删除失败时抛出错误
  */
 export async function deleteLabel(id: number): Promise<void> {
-  const response = await fetch(`${API_BASE_URL}/labels/${id}`, {
+  const response = await authFetch(`${API_BASE_URL}/labels/${id}`, {
     method: 'DELETE',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
   });
@@ -168,9 +155,10 @@ export async function deleteLabel(id: number): Promise<void> {
  * @throws 获取失败时抛出错误
  */
 export async function getLabelsByArticleId(articleId: number): Promise<Label[]> {
-  const response = await fetch(`${API_BASE_URL}/labels/articles/${articleId}`, {
+  const response = await authFetch(`${API_BASE_URL}/labels/articles/${articleId}`, {
     method: 'GET',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
   });
@@ -194,9 +182,10 @@ export async function addLabelsToArticle(
   articleId: number,
   labelIds: number[]
 ): Promise<void> {
-  const response = await fetch(`${API_BASE_URL}/labels/articles/${articleId}`, {
+  const response = await authFetch(`${API_BASE_URL}/labels/articles/${articleId}`, {
     method: 'POST',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(labelIds),
@@ -222,9 +211,10 @@ export async function removeLabelFromArticle(
   articleId: number,
   labelId: number
 ): Promise<void> {
-  const response = await fetch(`${API_BASE_URL}/labels/articles/${articleId}/${labelId}`, {
+  const response = await authFetch(`${API_BASE_URL}/labels/articles/${articleId}/${labelId}`, {
     method: 'DELETE',
     headers: {
+      ...getAuthHeaders(),
       'Content-Type': 'application/json',
     },
   });

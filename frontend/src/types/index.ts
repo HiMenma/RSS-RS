@@ -18,6 +18,7 @@ export interface LoginResponse {
   userId: number;
   username: string;
   email: string;
+  expiresIn?: number; // Access Token 过期时间（毫秒），默认 900000（15 分钟）
 }
 
 export interface RefreshTokenResponse {
@@ -26,6 +27,7 @@ export interface RefreshTokenResponse {
   userId: number;
   username: string;
   email: string;
+  expiresIn?: number; // Access Token 过期时间（毫秒），默认 900000（15 分钟）
 }
 
 export interface AuthState {
@@ -127,6 +129,7 @@ export interface FeedTreeNodeProps {
  */
 export interface Article {
   id: string;
+  intId?: number; // 用户文章关联表的主键，用于标签操作
   feedId: string;
   feedTitle?: string;
   feedFaviconUrl?: string;

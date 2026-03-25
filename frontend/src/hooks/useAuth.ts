@@ -21,7 +21,7 @@ export function useAuth() {
       username: response.username,
       email: response.email,
     };
-    login(user, response.accessToken, response.refreshToken);
+    login(user, response.accessToken, response.refreshToken, response.expiresIn);
     return response;
   }, [login]);
 
@@ -44,7 +44,7 @@ export function useAuth() {
 
     try {
       const response = await authApi.refreshToken(refreshToken);
-      setTokens(response.accessToken, response.refreshToken);
+      setTokens(response.accessToken, response.refreshToken, response.expiresIn);
       return true;
     } catch (error) {
       console.error('刷新 Token 失败:', error);

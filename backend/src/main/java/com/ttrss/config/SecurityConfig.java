@@ -49,28 +49,30 @@ public class SecurityConfig {
         http
                 // 禁用 CSRF（使用 JWT 不需要 CSRF）
                 .csrf(AbstractHttpConfigurer::disable)
-                // 配置异常处理
-                .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(authEntryPoint)
-                )
-                // 配置会话管理（无状态）
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
                 // 配置 CORS
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                // 配置请求授权
+                // 禁用 AnonymousAuthenticationFilter（登录端点不需要）
+                .anonymous(anonymous -> anonymous.disable())
+                // 配置请求授权（顺序很重要，必须把 permitAll 放在 anyRequest 之前）
                 .authorizeHttpRequests(auth -> auth
+                        // 允许访问认证相关端点（不需要 context-path，Spring Security 在 filter 链中看不到 context-path）
+                        .requestMatchers("/auth/**").permitAll()
                         // 允许访问 Actuator 端点
                         .requestMatchers("/actuator/**").permitAll()
-                        // 允许访问认证相关端点
-                        .requestMatchers("/api/auth/**").permitAll()
                         // 允许 OPTIONS 请求（CORS 预检）
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // 允许访问 Swagger/OpenAPI 文档（如果有）
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // 其他请求需要认证
                         .anyRequest().authenticated()
+                )
+                // 配置会话管理（无状态）
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                // 配置异常处理
+                .exceptionHandling(exception -> exception
+                        .authenticationEntryPoint(authEntryPoint)
                 )
                 // 添加 JWT 过滤器到过滤器链
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

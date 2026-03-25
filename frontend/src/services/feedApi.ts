@@ -2,29 +2,11 @@
  * 订阅源 API 服务
  */
 
-import type { FeedWithUnread, Category, ApiError } from '../types';
+import type { FeedWithUnread, Category } from '../types';
 import type { FeedFormData } from '../components/feed/FeedForm';
+import { authFetch, getAuthHeaders, handleResponseError } from '../utils/api';
 
 const API_BASE_URL = '/api';
-
-/**
- * 处理 API 响应错误
- */
-async function handleResponseError(response: Response): Promise<never> {
-  let errorData: ApiError | { message: string } = { message: '请求失败' };
-
-  try {
-    const contentType = response.headers.get('content-type');
-    if (contentType?.includes('application/json')) {
-      errorData = await response.json();
-    }
-  } catch {
-    // 忽略解析错误，使用默认错误信息
-  }
-
-  const errorMessage = 'message' in errorData ? errorData.message : `HTTP error! status: ${response.status}`;
-  throw new Error(errorMessage);
-}
 
 /**
  * 获取订阅源列表
@@ -33,10 +15,11 @@ async function handleResponseError(response: Response): Promise<never> {
  * @throws 获取失败时抛出错误
  */
 export async function getFeeds(): Promise<FeedWithUnread[]> {
-  const response = await fetch(`${API_BASE_URL}/feeds`, {
+  const response = await authFetch(`${API_BASE_URL}/feeds`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
   });
 
@@ -55,10 +38,11 @@ export async function getFeeds(): Promise<FeedWithUnread[]> {
  * @throws 获取失败时抛出错误
  */
 export async function getFeed(id: string): Promise<FeedWithUnread> {
-  const response = await fetch(`${API_BASE_URL}/feeds/${id}`, {
+  const response = await authFetch(`${API_BASE_URL}/feeds/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
   });
 
@@ -80,10 +64,11 @@ export async function getFeed(id: string): Promise<FeedWithUnread> {
  * @throws 创建失败时抛出错误
  */
 export async function createFeed(data: FeedFormData): Promise<FeedWithUnread> {
-  const response = await fetch(`${API_BASE_URL}/feeds`, {
+  const response = await authFetch(`${API_BASE_URL}/feeds`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
     body: JSON.stringify(data),
   });
@@ -113,10 +98,11 @@ export async function updateFeed(
   id: string,
   data: Partial<FeedFormData>
 ): Promise<FeedWithUnread> {
-  const response = await fetch(`${API_BASE_URL}/feeds/${id}`, {
+  const response = await authFetch(`${API_BASE_URL}/feeds/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
     body: JSON.stringify(data),
   });
@@ -145,10 +131,11 @@ export async function updateFeed(
  * @throws 删除失败时抛出错误
  */
 export async function deleteFeed(id: string): Promise<void> {
-  const response = await fetch(`${API_BASE_URL}/feeds/${id}`, {
+  const response = await authFetch(`${API_BASE_URL}/feeds/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
   });
 
@@ -167,10 +154,11 @@ export async function deleteFeed(id: string): Promise<void> {
  * @throws 获取失败时抛出错误
  */
 export async function getCategories(): Promise<Category[]> {
-  const response = await fetch(`${API_BASE_URL}/categories`, {
+  const response = await authFetch(`${API_BASE_URL}/categories`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
   });
 
@@ -193,10 +181,11 @@ export async function createCategory(
   title: string,
   parentId?: string | null
 ): Promise<Category> {
-  const response = await fetch(`${API_BASE_URL}/categories`, {
+  const response = await authFetch(`${API_BASE_URL}/categories`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      ...getAuthHeaders(),
     },
     body: JSON.stringify({ title, parentId }),
   });

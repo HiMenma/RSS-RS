@@ -1,0 +1,46 @@
+.column {
+  flex: 1;
+  background-color: white;
+  height: 100%;
+  overflow: hidden;
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.scrollArea {
+  height: 100%;
+}
+
+.content {
+  :global(img) {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :global(a) {
+    color: var(--mantine-color-blue-7);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  :global(pre) {
+    background-color: var(--mantine-color-gray-0);
+    padding: var(--mantine-spacing-sm);
+    border-radius: var(--mantine-radius-sm);
+    overflow-x: auto;
+  }
+
+  :global(blockquote) {
+    border-left: 3px solid var(--mantine-color-gray-3);
+    padding-left: var(--mantine-spacing-md);
+    color: var(--mantine-color-gray-6);
+  }
+}

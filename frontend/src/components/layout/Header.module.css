@@ -1,0 +1,11 @@
+.header {
+  background-color: #3b5998;
+  color: white;
+  height: 56px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

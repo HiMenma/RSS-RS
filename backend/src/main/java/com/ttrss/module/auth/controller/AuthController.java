@@ -32,7 +32,7 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @Tag(name = "认证管理", description = "用户认证相关 API")
 public class AuthController {
@@ -70,7 +70,7 @@ public class AuthController {
         log.info("用户登录成功：userId={}, login={}", user.getId(), user.getLogin());
 
         // 构建响应
-        JwtResponse response = JwtResponse.fromUser(accessToken, refreshToken, user);
+        JwtResponse response = JwtResponse.fromUser(accessToken, refreshToken, user, jwtService.getAccessTokenExpiration());
         return ResponseEntity.ok(response);
     }
 
@@ -139,7 +139,7 @@ public class AuthController {
         log.info("刷新 Token 成功：userId={}", user.getId());
 
         // 构建响应
-        JwtResponse response = JwtResponse.fromUser(newAccessToken, newRefreshToken, user);
+        JwtResponse response = JwtResponse.fromUser(newAccessToken, newRefreshToken, user, jwtService.getAccessTokenExpiration());
         return ResponseEntity.ok(response);
     }
 

@@ -28,7 +28,7 @@ import { useQuery } from '@tanstack/react-query';
 import { feedApi } from '../services/feedApi';
 import { useSearch, highlightKeyword } from '../hooks/useSearch';
 import { SearchBox } from '../components/search/SearchBox';
-import type { Feed } from '../types';
+import type { Feed, Category } from '../types';
 
 /**
  * 搜索结果项组件
@@ -170,6 +170,13 @@ export default function SearchPage() {
     staleTime: 1000 * 60 * 10,
   });
 
+  // 获取分类列表
+  const { data: categoriesData } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => feedApi.getCategories(),
+    staleTime: 1000 * 60 * 10,
+  });
+
   // 使用搜索 Hook
   const {
     results,
@@ -250,11 +257,14 @@ export default function SearchPage() {
     }));
   }, [feedsData]);
 
-  // 分类选择器数据（假设有分类数据）
+  // 分类选择器数据
   const categoryOptions = useMemo(() => {
-    // 这里可以根据实际 API 返回分类数据
-    return [] as { value: string; label: string }[];
-  }, []);
+    if (!categoriesData) return [];
+    return (categoriesData as Category[]).map((category) => ({
+      value: String(category.id),
+      label: category.title,
+    }));
+  }, [categoriesData]);
 
   return (
     <Container size="lg" py="xl">
@@ -298,7 +308,6 @@ export default function SearchPage() {
             clearable
             w={200}
             leftSection={<IconCategory size={16} />}
-            disabled={categoryOptions.length === 0}
           />
         </Group>
 

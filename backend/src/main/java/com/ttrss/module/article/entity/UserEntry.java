@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * tt-rss 用户文章实体类
@@ -59,6 +60,16 @@ public class UserEntry implements Serializable {
      * 分数
      */
     private Integer score;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdAt;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updatedAt;
 
     /**
      * 关联的文章实体 (多对一)

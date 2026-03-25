@@ -71,6 +71,72 @@ public class ArticleService extends ServiceImpl<UserEntryMapper, UserEntry> {
     }
 
     /**
+     * 删除单篇文章
+     *
+     * @param intId 用户文章 ID
+     * @param userId 用户 ID
+     * @return 是否删除成功
+     */
+    @Transactional
+    public boolean deleteArticle(Integer intId, Integer userId) {
+        log.debug("删除文章：intId={}, userId={}", intId, userId);
+
+        if (intId == null || userId == null) {
+            return false;
+        }
+
+        // 查询并验证权限
+        LambdaQueryWrapper<UserEntry> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(UserEntry::getIntId, intId)
+                .eq(UserEntry::getOwnerUid, userId);
+        UserEntry userEntry = userEntryMapper.selectOne(wrapper);
+
+        if (userEntry == null) {
+            log.debug("文章不存在或无权限：intId={}, userId={}", intId, userId);
+            return false;
+        }
+
+        // 删除用户文章记录
+        return userEntryMapper.deleteById(userEntry.getIntId()) > 0;
+    }
+
+    /**
+     * 批量删除文章
+     *
+     * @param intIds 用户文章 ID 列表
+     * @param userId 用户 ID
+     * @return 成功删除的数量
+     */
+    @Transactional
+    public int batchDeleteArticles(List<Integer> intIds, Integer userId) {
+        log.debug("批量删除文章：intIds={}, userId={}", intIds, userId);
+
+        if (intIds == null || intIds.isEmpty() || userId == null) {
+            return 0;
+        }
+
+        // 查询用户文章（包含权限验证）
+        LambdaQueryWrapper<UserEntry> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(UserEntry::getIntId, intIds)
+                .eq(UserEntry::getOwnerUid, userId);
+        List<UserEntry> userEntries = userEntryMapper.selectList(wrapper);
+
+        if (userEntries.isEmpty()) {
+            log.debug("没有可删除的文章：intIds={}, userId={}", intIds, userId);
+            return 0;
+        }
+
+        // 批量删除
+        List<Integer> idsToDelete = userEntries.stream()
+                .map(UserEntry::getIntId)
+                .collect(Collectors.toList());
+
+        int count = userEntryMapper.deleteBatchIds(idsToDelete);
+        log.info("批量删除完成：成功删除{}条，userId={}", count, userId);
+        return count;
+    }
+
+    /**
      * 标记文章已读/未读
      *
      * @param intId 用户文章 ID

@@ -210,4 +210,22 @@ public class JwtService {
     public String getTokenType(String token) {
         return extractClaim(token, claims -> claims.get("type", String.class));
     }
+
+    /**
+     * 获取 Access Token 过期时间（毫秒）
+     *
+     * @return 过期时间（毫秒）
+     */
+    public Long getAccessTokenExpiration() {
+        return expiration;
+    }
+
+    /**
+     * 获取 Refresh Token 过期时间（毫秒）
+     *
+     * @return 过期时间（毫秒）
+     */
+    public Long getRefreshTokenExpiration() {
+        return refreshExpiration;
+    }
 }

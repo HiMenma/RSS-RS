@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<opml version="1.0">
+  <head>
+    <dateCreated>Tue, 24 Mar 2026 15:07:47 +0000</dateCreated>
+    <title>Tiny Tiny RSS Feed Export</title>
+  </head>
+  <body>
+    <outline text="hacknews" ttrssSortOrder="1">
+</outline>
+    <outline text="GPT-Rec" ttrssSortOrder="2">
+</outline>
+    <outline text="个人博客" ttrssSortOrder="3">
+      <outline type="rss" text="After Babel" xmlUrl="https://www.afterbabel.com/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.afterbabel.com"/>
+      <outline type="rss" text="Airing 的博客" xmlUrl="https://blog.ursb.me/feed.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://blog.ursb.me/"/>
+      <outline type="rss" text="I Code It" xmlUrl="https://icodeit.org/index.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://icodeit.org/"/>
+      <outline type="rss" text="Indigo's Digital Mirror" xmlUrl="https://www.indigox.me/rss/" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.indigox.me/"/>
+      <outline type="rss" text="Limboy" xmlUrl="https://limboy.me/index.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://limboy.me"/>
+      <outline type="rss" text="Simon Willison's Weblog" xmlUrl="https://simonwillison.net/atom/everything" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://simonwillison.net/"/>
+      <outline type="rss" text="Stray Episode" xmlUrl="https://farer.org/rss/" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://farer.org/"/>
+      <outline type="rss" text="Tao of Mac" xmlUrl="https://taoofmac.com/atom.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://taoofmac.com"/>
+      <outline type="rss" text="Verne in GitHub" xmlUrl="https://einverne.github.io/rss.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://blog.einverne.info"/>
+      <outline type="rss" text="[Unknown]" xmlUrl="https://blog.yihong0618.me/rss.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://blog.yihong0618.me"/>
+      <outline type="rss" text="acytoo" xmlUrl="https://acytoo.com/atom.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://acytoo.com/"/>
+      <outline type="rss" text="太隐" xmlUrl="https://wangyurui.com/feed.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://wangyurui.com/"/>
+      <outline type="rss" text="寒峰路" xmlUrl="https://hagerhu.com/index.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://hagerhu.com/"/>
+      <outline type="rss" text="小赖子的英国生活和资讯" xmlUrl="https://justyy.com/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://justyy.com"/>
+      <outline type="rss" text="平替生活" xmlUrl="https://cheapy.top/rss/" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://cheapy.top/"/>
+      <outline type="rss" text="木木木木木" xmlUrl="https://immmmm.com/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://immmmm.com/"/>
+      <outline type="rss" text="枫言枫语" xmlUrl="https://justinyan.me/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://justinyan.me"/>
+      <outline type="rss" text="枫言枫语-播客" xmlUrl="https://justinyan.me/feed/podcast" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://fyfy.fm"/>
+      <outline type="rss" text="知了" xmlUrl="https://zhile.io/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="-1" htmlUrl="https://zhile.io"/>
+      <outline type="rss" text="面条实验室" xmlUrl="https://feed.miantiao.me/" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://chi.miantiao.me/"/>
+      <outline type="rss" text="奇妙的 Linux 世界" xmlUrl="https://www.hi-linux.com/atom.xml" ttrssSortOrder="1" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.hi-linux.com/"/>
+      <outline type="rss" text="BMPI" xmlUrl="https://www.bmpi.dev/index.xml" ttrssSortOrder="2" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.bmpi.dev/"/>
+      <outline type="rss" text="VirCloud's Blog" xmlUrl="https://vircloud.net/feed/" ttrssSortOrder="3" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://vircloud.net/"/>
+      <outline type="rss" text="1 Byte" xmlUrl="https://1byte.io/rss.xml" ttrssSortOrder="4" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://1byte.io"/>
+      <outline type="rss" text="DIYgod" xmlUrl="https://diygod.me/feed/xml" ttrssSortOrder="5" ttrssPurgeInterval="0" ttrssUpdateInterval="-1" htmlUrl="https://diygod.me"/>
+      <outline type="rss" text="t9t.io" xmlUrl="https://blog.t9t.io/atom.xml" ttrssSortOrder="7" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://blog.t9t.io/"/>
+      <outline type="rss" text="卡瓦邦噶！" xmlUrl="https://www.kawabangga.com/feed" ttrssSortOrder="9" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.kawabangga.com"/>
+      <outline type="rss" text="可可托海没有海的RSS" xmlUrl="https://darmau.design/rss.xml" ttrssSortOrder="10" ttrssPurgeInterval="0" ttrssUpdateInterval="-1" htmlUrl="https://darmau.design/"/>
+      <outline type="rss" text="庭说" xmlUrl="https://tingtalk.me/atom.xml" ttrssSortOrder="10" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://tingtalk.me/"/>
+      <outline type="rss" text="MikeoPerfect's Diary" xmlUrl="https://blog.mikeoperfect.com/atom.xml" ttrssSortOrder="11" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://blog.mikeoperfect.com/"/>
+      <outline type="rss" text="扯氮集" xmlUrl="http://weiwuhui.com/feed" ttrssSortOrder="12" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://weiwuhui.com"/>
+      <outline type="rss" text="方圆小站" xmlUrl="https://fangyuanxiaozhan.com/feed/" ttrssSortOrder="13" ttrssPurgeInterval="0" ttrssUpdateInterval="-1" htmlUrl="https://fangyuanxiaozhan.com"/>
+      <outline type="rss" text="唐巧的博客" xmlUrl="https://blog.devtang.com/atom.xml" ttrssSortOrder="15" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://blog.devtang.com/"/>
+      <outline type="rss" text="土木坛子" xmlUrl="https://tumutanzi.com/feed" ttrssSortOrder="17" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://tumutanzi.com"/>
+      <outline type="rss" text="王垠的草稿本" xmlUrl="https://yinwang1.wordpress.com/feed/" ttrssSortOrder="18" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://yinwang1.wordpress.com"/>
+      <outline type="rss" text="白宦成" xmlUrl="https://www.ixiqin.com/feed/" ttrssSortOrder="19" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.ixiqin.com"/>
+      <outline type="rss" text="晚晴幽草轩" xmlUrl="https://www.jeffjade.com/atom.xml" ttrssSortOrder="20" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.jeffjade.com/"/>
+      <outline type="rss" text="轶哥博客" xmlUrl="https://www.wyr.me/rss.xml" ttrssSortOrder="23" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.wyr.me"/>
+      <outline type="rss" text="涛叔" xmlUrl="https://taoshu.in/feed.xml" ttrssSortOrder="24" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://taoshu.in"/>
+      <outline type="rss" text="离别歌" xmlUrl="https://www.leavesongs.com/feed/" ttrssSortOrder="25" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.leavesongs.com"/>
+      <outline type="rss" text="程序员的喵" xmlUrl="https://catcoding.me/atom.xml" ttrssSortOrder="26" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://catcoding.me/"/>
+      <outline type="rss" text="落园" xmlUrl="https://www.loyhome.com/feed/" ttrssSortOrder="27" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.loyhome.com"/>
+    </outline>
+    <outline text="周刊" ttrssSortOrder="4">
+      <outline type="rss" text="增长黑客AI周报" xmlUrl="https://www.zengzhang.ai/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.zengzhang.ai"/>
+      <outline type="rss" text="豌豆花下猫" xmlUrl="https://pythoncat.top/rss.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://pythoncat.top/"/>
+      <outline type="rss" text="阿猫的博客" xmlUrl="https://ameow.xyz/feed.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://ameow.xyz"/>
+      <outline type="rss" text="阮一峰的网络日志" xmlUrl="http://www.ruanyifeng.com/blog/atom.xml" ttrssSortOrder="2" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://www.ruanyifeng.com/blog/"/>
+      <outline type="rss" text="1Link.Fun" xmlUrl="https://1link.fun/index.xml" ttrssSortOrder="5" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://1link.fun/"/>
+      <outline type="rss" text="LearnData-开源笔记" xmlUrl="https://newzone.top/rss.xml" ttrssSortOrder="6" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://newzone.top/"/>
+      <outline type="rss" text="老胡的周刊" xmlUrl="https://weekly.howie6879.com/rss/rss.xml" ttrssSortOrder="6" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://weekly.howie6879.com/"/>
+      <outline type="rss" text="HelloGitHub 月刊" xmlUrl="https://hellogithub.com/rss" ttrssSortOrder="7" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://hellogithub.com"/>
+      <outline type="rss" text="潮流周刊" xmlUrl="https://weekly.tw93.fun/rss.xml" ttrssSortOrder="8" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://weekly.tw93.fun/"/>
+    </outline>
+    <outline text="咨询类" ttrssSortOrder="5">
+      <outline type="rss" text="Hacker News 2" xmlUrl="https://supertechfans.com/cn/index.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://supertechfans.com/cn/"/>
+      <outline type="rss" text="在花科技频道" xmlUrl="https://news.himenma.top/api/rss.xml?channel=zaihuanews" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://localhost"/>
+      <outline type="rss" text="竹新社" xmlUrl="https://news.super-individual.com/api/rss.xml?channel=tnews365" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://localhost"/>
+      <outline type="rss" text="联合早报" xmlUrl="https://news.himenma.top/api/rss.xml?channel=zaobao_news" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://localhost"/>
+    </outline>
+    <outline text="工具类" ttrssSortOrder="6">
+      <outline type="rss" text="小众软件" xmlUrl="https://feed.appinn.com/" ttrssSortOrder="7" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.appinn.com"/>
+      <outline type="rss" text="异次元软件世界" xmlUrl="https://feed.iplaysoft.com/" ttrssSortOrder="9" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.iplaysoft.com"/>
+    </outline>
+    <outline text="技术" ttrssSortOrder="7">
+      <outline type="rss" text="Anthony Fu" xmlUrl="https://antfu.me/feed.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://antfu.me/"/>
+      <outline type="rss" text="Bad Concurrency" xmlUrl="http://bad-concurrency.blogspot.com/feeds/posts/default" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://bad-concurrency.blogspot.com/"/>
+      <outline type="rss" text="James Shore" xmlUrl="https://www.jamesshore.com/v2/feed" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.jamesshore.com"/>
+      <outline type="rss" text="xLog" xmlUrl="https://xlog.app/feed/hottest?interval=0" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://xlog.xlog.app"/>
+      <outline type="rss" text="伴鱼技术团队" xmlUrl="https://tech.ipalfish.com/blog/atom.xml" ttrssSortOrder="0" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://tech.ipalfish.com/blog/"/>
+      <outline type="rss" text="四火的唠叨" xmlUrl="https://www.raychase.net/feed" ttrssSortOrder="0" ttrssPurgeInterval="-1" ttrssUpdateInterval="0" htmlUrl="https://www.raychase.net"/>
+      <outline type="rss" text="博客园 - why技术" xmlUrl="https://www.cnblogs.com/thisiswhy/rss" ttrssSortOrder="2" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.cnblogs.com/thisiswhy/rss"/>
+      <outline type="rss" text="嘻嘻IT" xmlUrl="https://www.11meigui.com/feed" ttrssSortOrder="7" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="https://www.11meigui.com"/>
+      <outline type="rss" text="Mobility" xmlUrl="https://lichuanyang.top/atom.xml" ttrssSortOrder="9" ttrssPurgeInterval="0" ttrssUpdateInterval="0" htmlUrl="http://lichuanyang.top/"/>
+      <outline type="rss" text="美团技术团队" xmlUrl="https://tech.meituan.com/feed/" ttrssSortOrder="11" ttrssPurgeInterval="-1" ttrssUpdateInterval="0" htmlUrl="https://tech.meituan.com/feed/"/>
+      <outline type="rss" text="酷 壳 – CoolShell" xmlUrl="https://coolshell.cn/feed" ttrssSortOrder="12" ttrssPurgeInterval="-1" ttrssUpdateInterval="0" htmlUrl="https://coolshell.cn"/>
+    </outline>
+    <outline text="tt-rss-prefs" schema-version="147">
+      <outline pref-name="BLACKLISTED_TAGS" value="blog, blogroll, general, generic, main, misc, news, uncategorized"/>
+      <outline pref-name="CDM_EXPANDED" value=""/>
+      <outline pref-name="COMBINED_DISPLAY_MODE" value=""/>
+      <outline pref-name="DEFAULT_SEARCH_LANGUAGE" value="Simple"/>
+      <outline pref-name="ENABLE_API_ACCESS" value="1"/>
+      <outline pref-name="HIDE_READ_FEEDS" value=""/>
+      <outline pref-name="PURGE_UNREAD_ARTICLES" value=""/>
+      <outline pref-name="USER_LANGUAGE" value="auto"/>
+      <outline pref-name="USER_TIMEZONE" value="Asia/Shanghai"/>
+      <outline pref-name="WIDESCREEN_MODE" value="1"/>
+      <outline pref-name="_DEFAULT_VIEW_MODE" value="adaptive"/>
+      <outline pref-name="_DEFAULT_VIEW_ORDER_BY" value="feed_dates"/>
+      <outline pref-name="_ENABLED_PLUGINS" value="api_resize_media,fever,note"/>
+      <outline pref-name="_PREFS_MIGRATED" value="1"/>
+    </outline>
+    <outline text="tt-rss-labels" schema-version="147"/>
+    <outline text="tt-rss-filters" schema-version="147"/>
+  </body>
+</opml>

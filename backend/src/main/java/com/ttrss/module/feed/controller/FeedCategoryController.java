@@ -2,6 +2,8 @@ package com.ttrss.module.feed.controller;
 
 import com.ttrss.module.feed.dto.FeedCategoryDTO;
 import com.ttrss.module.feed.service.FeedCategoryService;
+import com.ttrss.module.auth.entity.User;
+import com.ttrss.module.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,12 +35,13 @@ import java.util.Map;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/categories")
 @RequiredArgsConstructor
 @Tag(name = "分类管理", description = "订阅源分类相关 API")
 public class FeedCategoryController {
 
     private final FeedCategoryService feedCategoryService;
+    private final UserService userService;
 
     /**
      * 获取当前用户 ID
@@ -50,17 +53,10 @@ public class FeedCategoryController {
         if (userDetails == null) {
             return null;
         }
-        // 用户名格式为 "id:username"，提取 ID
+        // 从 UserDetails 获取用户名，然后查询用户 ID
         String username = userDetails.getUsername();
-        if (username.contains(":")) {
-            String[] parts = username.split(":");
-            try {
-                return Integer.parseInt(parts[0]);
-            } catch (NumberFormatException e) {
-                log.warn("无法解析用户 ID: username={}", username);
-            }
-        }
-        return null;
+        User user = userService.getUserByLogin(username);
+        return user != null ? user.getId() : null;
     }
 
     /**

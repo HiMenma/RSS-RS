@@ -7,5 +7,4 @@ export { ArticleView } from './ArticleView';
 // 组件类型导出
 export type { ArticleListProps } from './ArticleList';
 export type { ArticleCardProps } from './ArticleCard';
-export type { ArticleToolbarProps } from './ArticleToolbar';
 export type { ArticleViewProps } from './ArticleView';

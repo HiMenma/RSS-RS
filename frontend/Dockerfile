@@ -1,7 +1,8 @@
 # Frontend Vite Dockerfile
 # 用于本地开发环境，支持热更新
 
-FROM node:20-alpine
+# 使用多平台镜像，支持 Apple Silicon
+FROM --platform=$BUILDPLATFORM node:20-alpine
 
 WORKDIR /app
 

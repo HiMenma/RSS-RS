@@ -222,6 +222,18 @@ public class OpmlService {
      * @return 是否为分类
      */
     private boolean isCategoryOutline(Outline outline) {
+        // 过滤掉 tt-rss 内部分类
+        String text = outline.getText();
+        if (text != null && (
+                text.startsWith("tt-rss-") ||
+                text.equalsIgnoreCase("tt-rss-prefs") ||
+                text.equalsIgnoreCase("tt-rss-labels") ||
+                text.equalsIgnoreCase("tt-rss-filters") ||
+                text.equalsIgnoreCase("tt-rss-filters")
+        )) {
+            return false;
+        }
+
         // 如果有子元素或者没有 xmlUrl 属性，则认为是分类
         return (outline.getChildren() != null && !outline.getChildren().isEmpty())
                 || outline.getXmlUrl() == null || outline.getXmlUrl().isEmpty();
@@ -346,10 +358,13 @@ public class OpmlService {
         Outline outline = new Outline();
         outline.setText(feed.getTitle());
         outline.setTitle(feed.getTitle());
+        outline.setType("rss");  // 直接设置 type 属性
         // 使用 Attribute 设置 xmlUrl 和 htmlUrl
         List<Attribute> attributes = new ArrayList<>();
         attributes.add(new Attribute("xmlUrl", feed.getFeedUrl()));
-        attributes.add(new Attribute("htmlUrl", feed.getSiteUrl()));
+        if (feed.getSiteUrl() != null) {
+            attributes.add(new Attribute("htmlUrl", feed.getSiteUrl()));
+        }
         outline.setAttributes(attributes);
         return outline;
     }
@@ -378,6 +393,7 @@ public class OpmlService {
                 Outline categoryOutline = new Outline();
                 categoryOutline.setText(category.getTitle());
                 categoryOutline.setTitle(category.getTitle());
+                categoryOutline.setType("rss");  // 直接设置 type 属性
 
                 // 添加该分类下的订阅源
                 List<Feed> categoryFeeds = feedsByCategory.get(category.getId());

@@ -174,26 +174,29 @@ export function ArticleList({
   );
 
   // 处理批量删除
-  const handleDeleteSelected = useCallback(async () => {
-    if (selectedIds.size === 0) return;
+  const handleDeleteSelected = useCallback(
+    async () => {
+      if (selectedIds.size === 0) return;
 
-    if (!window.confirm(`确定要删除选中的 ${selectedIds.size} 篇文章吗？`)) {
-      return;
-    }
+      if (!window.confirm(`确定要删除选中的 ${selectedIds.size} 篇文章吗？`)) {
+        return;
+      }
 
-    setIsLoading(true);
-    setLoadingType('delete');
+      setIsLoading(true);
+      setLoadingType('delete');
 
-    try {
-      await batchDelete(Array.from(selectedIds));
-      setSelectedIds(new Set());
-    } catch (err) {
-      console.error('批量删除失败:', err);
-    } finally {
-      setIsLoading(false);
-      setLoadingType(null);
-    }
-  }, [selectedIds, batchDelete]);
+      try {
+        await batchDelete(Array.from(selectedIds));
+        setSelectedIds(new Set());
+      } catch (err) {
+        console.error('批量删除失败:', err);
+      } finally {
+        setIsLoading(false);
+        setLoadingType(null);
+      }
+    },
+    [selectedIds, batchDelete]
+  );
 
   // 处理刷新
   const handleRefresh = useCallback(async () => {

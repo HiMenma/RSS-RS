@@ -4,7 +4,8 @@
 # ===========================================
 # 构建阶段
 # ===========================================
-FROM node:20-alpine AS build
+# 使用多平台镜像，支持 Apple Silicon
+FROM --platform=$BUILDPLATFORM node:20-alpine AS build
 
 WORKDIR /app
 

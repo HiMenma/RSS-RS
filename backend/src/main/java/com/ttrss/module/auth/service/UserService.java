@@ -3,11 +3,13 @@ package com.ttrss.module.auth.service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ttrss.module.auth.entity.User;
 import com.ttrss.module.auth.mapper.UserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
  * 用户服务类
  */
+@Slf4j
 @Service
 public class UserService extends ServiceImpl<UserMapper, User> {
 
@@ -41,14 +43,18 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     public User authenticate(String login, String password) {
         User user = baseMapper.selectByLogin(login);
         if (user == null) {
+            log.warn("用户不存在：login={}", login);
             return null;
         }
         // 使用 BCrypt 验证密码
-        org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder encoder = 
+        org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder encoder =
                 new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
-        if (encoder.matches(password, user.getPwdHash())) {
+        boolean matches = encoder.matches(password, user.getPwdHash());
+        log.info("密码验证：login={}, matches={}, pwdHash={}", login, matches, user.getPwdHash());
+        if (matches) {
             return user;
         }
+        log.warn("密码不匹配：login={}", login);
         return null;
     }
 

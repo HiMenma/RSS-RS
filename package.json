@@ -1,0 +1,30 @@
+{
+  "name": "rss",
+  "version": "1.0.0",
+  "description": "Tiny Tiny RSS 现代化版本，基于 React + Spring Boot 技术栈。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "test:e2e:core": "playwright test e2e/core.spec.ts",
+    "test:e2e:simple": "playwright test e2e/simple.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HiMenma/rss.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HiMenma/rss/issues"
+  },
+  "homepage": "https://github.com/HiMenma/rss#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}

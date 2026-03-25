@@ -77,7 +77,17 @@ public class Feed implements Serializable {
     private Boolean isUpdating;
 
     /**
-     * 更新时间戳（用于乐观锁）
+     * 更新时间戳（用于乐观锁，PHP 版本为 VARCHAR）
      */
-    private Long updateStamp;
+    private String updateStamp;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdAt;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updatedAt;
 }

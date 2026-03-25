@@ -1,12 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { MantineProvider } from '@mantine/core';
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter } from 'react-router';
 import '@mantine/core/styles.css';
 
 import App from './App.tsx';
-import { theme } from './styles/theme.ts';
+import { lightTheme, darkTheme } from './theme/theme.ts';
+import { ThemeProvider, useTheme } from './theme/ThemeProvider';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,14 +18,38 @@ const queryClient = new QueryClient({
   },
 });
 
+function AppProviders({ children }: { children: React.ReactNode }) {
+  const { colorScheme } = useTheme();
+
+  return (
+    <MantineProvider
+      theme={colorScheme === 'dark' ? darkTheme : lightTheme}
+      defaultColorScheme={colorScheme}
+    >
+      {children}
+    </MantineProvider>
+  );
+}
+
+function Root() {
+  return (
+    <>
+      <ColorSchemeScript defaultColorScheme="light" />
+      <ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <AppProviders>
+              <App />
+            </AppProviders>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </>
+  );
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </MantineProvider>
-    </QueryClientProvider>
+    <Root />
   </StrictMode>
 );

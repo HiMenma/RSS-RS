@@ -1,7 +1,8 @@
 # Backend Spring Boot Dockerfile
 # 用于本地开发环境，支持热更新
 
-FROM eclipse-temurin:17-jdk-alpine AS build
+# 使用 Amazon Corretto 镜像（支持 Apple Silicon/ARM64）
+FROM amazoncorretto:17-alpine AS build
 
 WORKDIR /app
 
@@ -19,12 +20,9 @@ RUN ./gradlew bootJar --no-daemon
 # ===========================================
 # 运行时镜像
 # ===========================================
-FROM eclipse-temurin:17-jre-alpine
+FROM amazoncorretto:17-alpine
 
 WORKDIR /app
-
-# 安装必要的工具（用于开发环境）
-RUN apk add --no-cache bash curl
 
 # 从构建阶段复制 JAR 文件
 COPY --from=build /app/build/libs/*.jar app.jar

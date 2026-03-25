@@ -2,6 +2,8 @@ package com.ttrss.module.opml.controller;
 
 import com.ttrss.module.opml.dto.OpmlImportResponse;
 import com.ttrss.module.opml.service.OpmlService;
+import com.ttrss.module.auth.entity.User;
+import com.ttrss.module.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -28,12 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Slf4j
 @RestController
-@RequestMapping("/api/opml")
+@RequestMapping("/opml")
 @RequiredArgsConstructor
 @Tag(name = "OPML 管理", description = "OPML 导入导出相关 API")
 public class OpmlController {
 
     private final OpmlService opmlService;
+    private final UserService userService;
 
     /**
      * 获取当前用户 ID
@@ -45,17 +48,10 @@ public class OpmlController {
         if (userDetails == null) {
             return null;
         }
-        // 用户名格式为 "id:username"，提取 ID
+        // 从 UserDetails 获取用户名，然后查询用户 ID
         String username = userDetails.getUsername();
-        if (username.contains(":")) {
-            String[] parts = username.split(":");
-            try {
-                return Integer.parseInt(parts[0]);
-            } catch (NumberFormatException e) {
-                log.warn("无法解析用户 ID: username={}", username);
-            }
-        }
-        return null;
+        User user = userService.getUserByLogin(username);
+        return user != null ? user.getId() : null;
     }
 
     /**

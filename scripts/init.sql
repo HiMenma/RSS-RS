@@ -1,11 +1,12 @@
 -- tt-rss 数据库初始化脚本
 -- 用于生产环境首次部署
+-- 兼容 PHP 版 tt-rss 表结构，支持数据平滑迁移
 
 -- 创建扩展（全文搜索）
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 -- ===========================================
--- 用户表（兼容现有 tt-rss）
+-- 用户表（兼容现有 tt-rss PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_users (
     id SERIAL PRIMARY KEY,
@@ -39,7 +40,7 @@ CREATE INDEX IF NOT EXISTS idx_categories_owner_uid ON ttrss_feed_categories(own
 CREATE INDEX IF NOT EXISTS idx_categories_parent_cat ON ttrss_feed_categories(parent_cat);
 
 -- ===========================================
--- 订阅源表
+-- 订阅源表（兼容 PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_feeds (
     id SERIAL PRIMARY KEY,
@@ -53,7 +54,7 @@ CREATE TABLE IF NOT EXISTS ttrss_feeds (
     update_interval INTEGER DEFAULT 60,
     last_update_check TIMESTAMP,
     is_updating BOOLEAN DEFAULT FALSE,
-    update_stamp VARCHAR(255),
+    update_stamp VARCHAR(255),  -- PHP 版本使用 VARCHAR 存储时间戳
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(owner_uid, feed_url)
@@ -87,7 +88,7 @@ CREATE INDEX IF NOT EXISTS idx_entries_title_trgm ON ttrss_entries USING gin (ti
 CREATE INDEX IF NOT EXISTS idx_entries_content_trgm ON ttrss_entries USING gin (content gin_trgm_ops);
 
 -- ===========================================
--- 用户文章关联表
+-- 用户文章关联表（兼容 PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_user_entries (
     int_id SERIAL PRIMARY KEY,
@@ -112,7 +113,7 @@ CREATE INDEX IF NOT EXISTS idx_user_entries_marked ON ttrss_user_entries(marked)
 CREATE INDEX IF NOT EXISTS idx_user_entries_owner_unread ON ttrss_user_entries(owner_uid, unread);
 
 -- ===========================================
--- 标签表
+-- 标签表（兼容 PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_labels2 (
     id SERIAL PRIMARY KEY,
@@ -129,7 +130,7 @@ CREATE TABLE IF NOT EXISTS ttrss_labels2 (
 CREATE INDEX IF NOT EXISTS idx_labels_owner_uid ON ttrss_labels2(owner_uid);
 
 -- ===========================================
--- 用户标签关联表
+-- 用户标签关联表（兼容 PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_user_labels2 (
     id SERIAL PRIMARY KEY,
@@ -144,7 +145,7 @@ CREATE INDEX IF NOT EXISTS idx_user_labels_label_id ON ttrss_user_labels2(label_
 CREATE INDEX IF NOT EXISTS idx_user_labels_article_id ON ttrss_user_labels2(article_id);
 
 -- ===========================================
--- 附件表
+-- 附件表（兼容 PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_enclosures (
     id SERIAL PRIMARY KEY,
@@ -163,7 +164,7 @@ CREATE TABLE IF NOT EXISTS ttrss_enclosures (
 CREATE INDEX IF NOT EXISTS idx_enclosures_post_id ON ttrss_enclosures(post_id);
 
 -- ===========================================
--- 计数器缓存表
+-- 计数器缓存表（兼容 PHP 版本）
 -- ===========================================
 CREATE TABLE IF NOT EXISTS ttrss_counters_cache (
     id SERIAL PRIMARY KEY,

@@ -55,3 +55,17 @@ dist/
 # Database
 *.db
 *.sqlite
+/e2e/
+
+# Test results
+test-results/
+playwright-report/
+
+# Development files
+.qwen/
+API_DEBUG_REPORT.md
+quick-ref.txt
+test-import.opml
+
+# npm lock files (if not using npm)
+package-lock.json

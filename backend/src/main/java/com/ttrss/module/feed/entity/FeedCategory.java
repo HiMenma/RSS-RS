@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * tt-rss 订阅源分类实体类
@@ -44,4 +45,14 @@ public class FeedCategory implements Serializable {
      * 排序 ID
      */
     private Integer orderId;
+
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createdAt;
+
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updatedAt;
 }

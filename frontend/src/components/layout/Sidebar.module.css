@@ -1,0 +1,65 @@
+.sidebar {
+  width: 260px;
+  background-color: white;
+  border-right: 1px solid #e0e0e0;
+  height: 100%;
+  position: relative;
+  transition: width 0.3s ease;
+
+  &[data-collapsed="true"] {
+    width: 50px;
+  }
+
+  /* 移动端样式 */
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    width: 260px !important;
+
+    &[data-mobile-opened="true"] {
+      transform: translateX(0);
+    }
+  }
+}
+
+.mobileOverlay {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+
+  @media (min-width: 769px) {
+    display: none;
+  }
+}
+
+.toggleContainer {
+  position: absolute;
+  top: var(--mantine-spacing-xs);
+  right: var(--mantine-spacing-xs);
+  z-index: 10;
+}
+
+.toggleButton {
+  background-color: #f5f5f5;
+  
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+.header {
+  padding: var(--mantine-spacing-md);
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.scrollArea {
+  height: calc(100% - 60px);
+}

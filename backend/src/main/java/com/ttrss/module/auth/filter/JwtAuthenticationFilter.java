@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * JWT 认证过滤器
@@ -37,6 +40,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
      */
     private static final String BEARER_PREFIX = "Bearer ";
 
+    /**
+     * 需要跳过 JWT 认证的路径后缀（认证端点本身不需要 Token）
+     * 使用后缀匹配以处理 context-path（如 /api/auth/login）
+     */
+    private static final List<String> SKIP_PATH_SUFFIXES = List.of(
+            "/auth/login",
+            "/auth/register",
+            "/auth/refresh",
+            "/auth/logout"
+    );
+
     private final JwtService jwtService;
 
     /**
@@ -54,6 +68,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
+        // 跳过认证端点（使用后缀匹配以处理 context-path）
+        String requestPath = request.getRequestURI();
+        if (SKIP_PATH_SUFFIXES.stream().anyMatch(requestPath::endsWith)) {
+            log.debug("跳过 JWT 认证：{}", requestPath);
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try {
             // 从请求头提取 JWT Token
             String jwt = extractJwtFromRequest(request);
@@ -64,12 +86,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     Integer userId = jwtService.getUserIdFromToken(jwt);
                     String username = jwtService.getUsernameFromToken(jwt);
 
+                    // 创建 User 对象（实现 UserDetails 接口）
+                    User principal = new User(username, "", new ArrayList<>(List.of(new SimpleGrantedAuthority("ROLE_USER"))));
+
                     // 创建认证对象
                     UsernamePasswordAuthenticationToken authentication =
                             new UsernamePasswordAuthenticationToken(
-                                    username,
+                                    principal,
                                     null,
-                                    new ArrayList<>() // 权限列表（可后续扩展）
+                                    principal.getAuthorities()
                             );
 
                     // 设置认证详情

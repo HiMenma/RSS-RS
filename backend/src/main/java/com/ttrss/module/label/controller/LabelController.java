@@ -2,6 +2,8 @@ package com.ttrss.module.label.controller;
 
 import com.ttrss.module.label.dto.LabelDTO;
 import com.ttrss.module.label.service.LabelService;
+import com.ttrss.module.auth.entity.User;
+import com.ttrss.module.auth.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -39,6 +41,7 @@ import java.util.Map;
 public class LabelController {
 
     private final LabelService labelService;
+    private final UserService userService;
 
     /**
      * 获取当前用户 ID
@@ -50,17 +53,10 @@ public class LabelController {
         if (userDetails == null) {
             return null;
         }
-        // 用户名格式为 "id:username"，提取 ID
+        // 从 UserDetails 获取用户名，然后查询用户 ID
         String username = userDetails.getUsername();
-        if (username.contains(":")) {
-            String[] parts = username.split(":");
-            try {
-                return Integer.parseInt(parts[0]);
-            } catch (NumberFormatException e) {
-                log.warn("无法解析用户 ID: username={}", username);
-            }
-        }
-        return null;
+        User user = userService.getUserByLogin(username);
+        return user != null ? user.getId() : null;
     }
 
     /**
